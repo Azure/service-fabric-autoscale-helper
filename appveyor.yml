@@ -1,0 +1,5 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+clone_folder: c:\projects\myproject
+build_script:
+  powershell.exe C:\projects\myproject\build.ps1

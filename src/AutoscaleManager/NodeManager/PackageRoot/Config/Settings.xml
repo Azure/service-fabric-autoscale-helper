@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Settings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+  <Section Name="NodeManagerActorServiceReplicatorConfig">
+    <Parameter Name="ReplicatorEndpoint" Value="NodeManagerActorServiceReplicatorEndpoint" />
+    <Parameter Name="BatchAcknowledgementInterval" Value="0.005" />
+  </Section>
+  <Section Name="NodeManagerActorServiceReplicatorSecurityConfig">
+    <Parameter Name="CredentialType" Value="None" />
+  </Section>
+  <Section Name="NodeManagerSettings">
+    <Parameter Name="ScanIntervalInSeconds" Value="60" />
+    <Parameter Name="ClientOperationTimeoutInSeconds" Value="30" />
+    <Parameter Name="DownNodeGraceIntervalInSeconds" Value="120" />
+    <Parameter Name="SkipNodesUnderFabricUpgrade" Value="true" />
+  </Section>
+  <!-- The content will be generated during build -->
+</Settings>
