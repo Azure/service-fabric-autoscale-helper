@@ -1,4 +1,9 @@
 ##
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+##
+
+##
 #  Builds the source code and generates application package.
 #  You can also open the solution file in Visual Studio 2017 and build.
 ##

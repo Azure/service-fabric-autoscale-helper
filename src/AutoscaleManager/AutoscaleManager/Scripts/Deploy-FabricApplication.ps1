@@ -1,4 +1,9 @@
-﻿<#
+﻿##
+# Copyright (c) Microsoft Corporation. All rights reserved.
+# Licensed under the MIT License.
+##
+
+<#
 .SYNOPSIS 
 Deploys a Service Fabric application type to a cluster.
 
