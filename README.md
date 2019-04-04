@@ -16,12 +16,12 @@ If you plan to run stateless only workload which is configured to auto scale in 
 - Deploy the Service Fabric auto scale helper application on the cluster, to remove the scaled-in down nodes from the cluster.
 
 ## About this application
-While running statless workloads, its advisable to set the [durability tier](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-capacity#the-durability-characteristics-of-the-cluster) of the node type as Bronze. This ensures faster scale outs and avoiding scenarios like scale in getting stuck. However, this also results in removed nodes/ VM instances [displayed as unhealthy](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-scale-up-down#behaviors-you-may-observe-in-service-fabric-explorer) in the Service Fabric explorer. To remove them, one needs to explicitly invoke [Remove-ServiceFabricNodeState](https://docs.microsoft.com/en-us/powershell/module/servicefabric/remove-servicefabricnodestate?view=azureservicefabricps) on that node name. The Service Fabric auto scale helper application essentially takes care of removing nodes if they are down for a long period of time by triggering Remove-ServiceFabricNodeState. 
+While running stateless workloads, it's advisable to set the [durability tier](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-capacity#the-durability-characteristics-of-the-cluster) of the node type as Bronze. This ensures faster scale outs and avoiding scenarios like scale in getting stuck. However, this also results in removed nodes/ VM instances [displayed as unhealthy](https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-cluster-scale-up-down#behaviors-you-may-observe-in-service-fabric-explorer) in the Service Fabric explorer. To remove them, one needs to explicitly invoke [Remove-ServiceFabricNodeState](https://docs.microsoft.com/en-us/powershell/module/servicefabric/remove-servicefabricnodestate?view=azureservicefabricps) on that node name. The Service Fabric auto scale helper application essentially takes care of removing nodes if they are down for a long period of time by triggering Remove-ServiceFabricNodeState. 
 
 ## Application Parameters
 The application exposes set of application parameters which allows users to customize the application deployment as per their needs. 
 
-### Parameter Descripiton
+### Parameter Description
 |Parameter|Description|
 |:-|:-|
 |NodeManagerActorService_ScanIntervalInSeconds|How often the application should scan for the nodes ready for removal. <br/><br/>Default value is `60` seconds.|
@@ -61,7 +61,7 @@ AutoscaleManager -> E:\service-fabric-autoscale-helper\src\AutoscaleManager\Auto
 PS E:\service-fabric-autoscale-helper>
 ```
 
-By default the script will create a `release` package of the application in `src\AutoscaleManager\AutoscaleManager\pkg\Release` folder. 
+By default, the script will create a `release` package of the application in `src\AutoscaleManager\AutoscaleManager\pkg\Release` folder. 
 
 ### Deploy Application
 
@@ -92,5 +92,4 @@ a CLA and decorate the PR appropriately (e.g., label, comment). Simply follow th
 provided by the bot. You will only need to do this once across all repos using our CLA.
 
 This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
