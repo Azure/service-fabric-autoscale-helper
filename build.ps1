@@ -23,7 +23,10 @@ param
     [string]$Verbosity = 'minimal',
 
     # path to msbuild
-    [string]$MSBuildFullPath
+    [string]$MSBuildFullPath,
+
+    [ValidateSet('win7-x64','linux-x64')]    
+    [string]$Runtime = 'win7-x64'
 )
 
 $ErrorActionPreference = "Stop"
@@ -127,6 +130,7 @@ $msbuildArgs = @(
     "/verbosity:$verbosity",  
     "/property:RequestedVerbosity=$verbosity", 
     "/property:Configuration=$configuration",
+    "/property:ReferenceRuntimeIdentifier=$Runtime"
     $args)
 & $msbuildFullPath $msbuildArgs
 

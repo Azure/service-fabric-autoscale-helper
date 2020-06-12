@@ -27,6 +27,7 @@
     <None Include="PublishProfiles\Local.1Node.xml" />
     <None Include="PublishProfiles\Local.5Node.xml" />
     <None Include="Scripts\Deploy-FabricApplication.ps1" />
+    <None Include="Scripts\Update-ServiceManifest.ps1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NodeManager\NodeManager.csproj" />
@@ -43,5 +44,10 @@
   <Target Name="ValidateMSBuildFiles">
     <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.7\build\Microsoft.VisualStudio.Azure.Fabric.Application.props')" Text="Unable to find the '..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.7\build\Microsoft.VisualStudio.Azure.Fabric.Application.props' file. Please restore the 'Microsoft.VisualStudio.Azure.Fabric.MSBuild' Nuget package." />
     <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.7\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets')" Text="Unable to find the '..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.7\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets' file. Please restore the 'Microsoft.VisualStudio.Azure.Fabric.MSBuild' Nuget package." />
+  </Target>
+
+  <Target Name="ChangeServiceManifest" Condition=" '$(ReferenceRuntimeIdentifier)' == 'linux-x64'" AfterTargets="Package">
+    <Message Text="Running powershell -noprofile $(MSBuildProjectDirectory)\Scripts\Update-ServiceManifest.ps1 -pathToManifest $(MSBuildProjectDirectory)\$(PackageLocation)" Importance="high" />
+    <Exec Command="powershell -noprofile $(MSBuildProjectDirectory)\Scripts\Update-ServiceManifest.ps1 -pathToManifest $(MSBuildProjectDirectory)\$(PackageLocation)" />
   </Target>
 </Project>
