@@ -5,7 +5,7 @@
   <metadata minClientVersion="3.3.0">
     <id>AutoscaleManager-$RuntimeIdentifier$</id>
     <authors>raunakpandya, vipulm-msft, prashantbhutani90</authors>
-    <version>1.0.0</version>
+    <version>$Version$</version>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This package contains the AutoscaleManager Application (Config files and binaries).</description>
   <contentFiles>
