@@ -9,10 +9,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This package contains the AutoscaleManager Application (Config files and binaries).</description>
   <contentFiles>
-    <files include="**/*.*" buildAction="None" copyToOutput="true" />
+    <files include="**" buildAction="None" copyToOutput="true" />
   </contentFiles>
   </metadata>
   <files>
-    <file src="**.*" target="contentFiles\any\any" />
+    <file src="**" target="contentFiles\any\any" />
   </files>
 </package>
