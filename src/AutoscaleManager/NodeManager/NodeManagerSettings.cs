@@ -15,6 +15,7 @@ namespace NodeManager
         private const int defaultClientOperationTimeoutInSeconds = 30;
         private const int defaultDownNodeGraceIntervalInSeconds = 120;
         private const bool defaultSkipNodesUnderFabricUpgrade = true;
+        private const string defaultNodeTypesToManage = "All";
 
         public NodeManagerSettings(ConfigurationSettings settings)
         {
@@ -24,6 +25,7 @@ namespace NodeManager
             this.ClientOperationTimeout = TimeSpan.FromSeconds(GetValueFromSection(configSection, "ClientOperationTimeoutInSeconds", defaultClientOperationTimeoutInSeconds));
             this.DownNodeGraceInterval = TimeSpan.FromSeconds(GetValueFromSection(configSection, "DownNodeGraceIntervalInSeconds", defaultDownNodeGraceIntervalInSeconds));
             this.SkipNodesUnderFabricUpgrade = GetValueFromSection(configSection, "SkipNodesUnderFabricUpgrade", defaultSkipNodesUnderFabricUpgrade);
+            this.NodeTypesToManage = GetValueFromSection(configSection, "NodeTypesToManage", defaultNodeTypesToManage);
         }
 
         public TimeSpan ScanInterval { get; }
@@ -33,6 +35,8 @@ namespace NodeManager
         public TimeSpan DownNodeGraceInterval { get; }
 
         public bool SkipNodesUnderFabricUpgrade { get; }
+
+        public string NodeTypesToManage { get; }
 
         private int GetValueFromSection(ConfigurationSection configSection, string parameter, int defaultValue)
         {
