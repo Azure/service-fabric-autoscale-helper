@@ -13,6 +13,7 @@ namespace NodeManager
     using System.Fabric.Description;
     using System.Fabric.Health;
     using System.Fabric.Query;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -152,6 +153,8 @@ namespace NodeManager
             var queryDescription = new NodeQueryDescription();
             queryDescription.ContinuationToken = null;
 
+            var blockedNodeTypes = this.nodeManagerSettings.NodeTypesToSkip.Split(',').ToList();
+
             do
             {
                 var nodeList = await client.QueryManager.GetNodePagedListAsync(
@@ -166,7 +169,7 @@ namespace NodeManager
                         continue;
                     }
 
-                    if (node.NodeStatus == NodeStatus.Down)
+                    if (node.NodeStatus == NodeStatus.Down && !blockedNodeTypes.Contains(node.NodeType))
                     {
                         // is down long enough
                         if (IsDownLongEnough(node))

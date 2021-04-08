@@ -12,7 +12,7 @@
     <Parameter Name="NodeManagerActorService_ClientOperationTimeoutInSeconds" DefaultValue="30" />
     <Parameter Name="NodeManagerActorService_DownNodeGraceIntervalInSeconds" DefaultValue="120" />
     <Parameter Name="NodeManagerActorService_SkipNodesUnderFabricUpgrade" DefaultValue="true" />
-    <Parameter Name="NodeManagerActorService_NodeTypesToManage" DefaultValue="All" />
+    <Parameter Name="NodeManagerActorService_NodeTypesToSkip" DefaultValue="" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
@@ -27,7 +27,7 @@
             <Parameter Name="ClientOperationTimeoutInSeconds" Value="[NodeManagerActorService_ClientOperationTimeoutInSeconds]" />
             <Parameter Name="DownNodeGraceIntervalInSeconds" Value="[NodeManagerActorService_DownNodeGraceIntervalInSeconds]" />
             <Parameter Name="SkipNodesUnderFabricUpgrade" Value="[NodeManagerActorService_SkipNodesUnderFabricUpgrade]" />
-            <Parameter Name="NodeTypesToManage" Value="[NodeManagerActorService_NodeTypesToManage]" />
+            <Parameter Name="NodeTypesToSkip" Value="[NodeManagerActorService_NodeTypesToSkip]" />
           </Section>
         </Settings>
       </ConfigOverride>
