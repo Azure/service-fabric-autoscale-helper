@@ -153,7 +153,7 @@ namespace NodeManager
             var queryDescription = new NodeQueryDescription();
             queryDescription.ContinuationToken = null;
 
-            var blockedNodeTypes = this.nodeManagerSettings.NodeTypesToSkip.Split(',').ToList();
+            var nodeTypesToManage = this.nodeManagerSettings.NodeTypesToManage.Split(',').ToList();
 
             do
             {
@@ -169,7 +169,7 @@ namespace NodeManager
                         continue;
                     }
 
-                    if (node.NodeStatus == NodeStatus.Down && !blockedNodeTypes.Contains(node.NodeType))
+                    if (node.NodeStatus == NodeStatus.Down && nodeTypesToManage.Contains(node.NodeType))
                     {
                         // is down long enough
                         if (IsDownLongEnough(node))

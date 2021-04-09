@@ -12,7 +12,7 @@
     <Parameter Name="ClientOperationTimeoutInSeconds" Value="30" />
     <Parameter Name="DownNodeGraceIntervalInSeconds" Value="120" />
     <Parameter Name="SkipNodesUnderFabricUpgrade" Value="true" />
-    <Parameter Name="NodeTypesToSkip" Value="" />
+    <Parameter Name="NodeTypesToManage" Value="" />
   </Section>
   <!-- The content will be generated during build -->
 </Settings>
