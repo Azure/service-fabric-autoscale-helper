@@ -45,7 +45,7 @@ namespace NodeManager
                        new HealthInformation("NodeManager", "NodeManagerSettings", HealthState.Warning)
                        {
                            RemoveWhenExpired = true,
-                           TimeToLive = TimeSpan.FromSeconds(300),
+                           TimeToLive = this.nodeManagerSettings.ScanInterval,
                            Description = "Add atleast one NodeType in NodeTypestoManage in AutoScaleHelper Service Manifest."
                        });
                 }
