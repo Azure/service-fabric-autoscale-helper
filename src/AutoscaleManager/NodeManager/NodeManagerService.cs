@@ -39,18 +39,30 @@ namespace NodeManager
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                try
+                if (string.IsNullOrEmpty(this.nodeManagerSettings.NodeTypesToManage))
                 {
-                    await RemoveScaledInNodesAsync(cancellationToken);
+                    Context.CodePackageActivationContext.ReportApplicationHealth(
+                       new HealthInformation("NodeManager", "NodeManagerSettings", HealthState.Warning)
+                       {
+                           RemoveWhenExpired = true,
+                           TimeToLive = TimeSpan.FromSeconds(300),
+                           Description = "Add atleast one NodeType in NodeTypestoManage in AutoScaleHelper Service Manifest."
+                       });
                 }
-                catch (Exception e)
+                else
                 {
-                    ActorEventSource.Current.ServiceError(
-                        this.Context,
-                        "Failed to remove scaled-in nodes, Error = {0}",
-                        e);
+                    try
+                    {
+                        await RemoveScaledInNodesAsync(cancellationToken);
+                    }
+                    catch (Exception e)
+                    {
+                        ActorEventSource.Current.ServiceError(
+                            this.Context,
+                            "Failed to remove scaled-in nodes, Error = {0}",
+                            e);
+                    }
                 }
-
 
                 await Task.Delay(this.nodeManagerSettings.ScanInterval, cancellationToken);
             }

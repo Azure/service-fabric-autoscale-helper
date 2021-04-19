@@ -13,13 +13,13 @@
   </PropertyGroup>
  
   <ItemGroup>
-    <PackageReference Include="Microsoft.ServiceFabric" Version="7.2.477" />
-    <PackageReference Include="Microsoft.ServiceFabric.Actors" Version="4.2.477" />
-    <PackageReference Include="Microsoft.ServiceFabric.Data" Version="4.2.477" />
-    <PackageReference Include="Microsoft.ServiceFabric.Diagnostics.Internal" Version="4.2.477" />
-    <PackageReference Include="Microsoft.ServiceFabric.FabricTransport.Internal" Version="4.2.477" />
-    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="4.2.477" />
-    <PackageReference Include="Microsoft.ServiceFabric.Services.Remoting" Version="4.2.477" />
+    <PackageReference Include="Microsoft.ServiceFabric" Version="8.0.514" />
+    <PackageReference Include="Microsoft.ServiceFabric.Actors" Version="5.0.514" />
+    <PackageReference Include="Microsoft.ServiceFabric.Data" Version="5.0.514" />
+    <PackageReference Include="Microsoft.ServiceFabric.Diagnostics.Internal" Version="5.0.514" />
+    <PackageReference Include="Microsoft.ServiceFabric.FabricTransport.Internal" Version="5.0.514" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services" Version="5.0.514" />
+    <PackageReference Include="Microsoft.ServiceFabric.Services.Remoting" Version="5.0.514" />
   </ItemGroup>
 
   <ItemGroup>
