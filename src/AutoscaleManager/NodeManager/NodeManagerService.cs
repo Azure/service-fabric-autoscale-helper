@@ -46,7 +46,7 @@ namespace NodeManager
                        {
                            RemoveWhenExpired = true,
                            TimeToLive = this.nodeManagerSettings.ScanInterval,
-                           Description = "Add atleast one NodeType in NodeTypestoManage in AutoScaleHelper Service Manifest."
+                           Description = "Required Parameter NodeTypesToManage is empty. Set this parameter to configure the comma separated nodetype name list, to be managed by the AutoScaleHelper."
                        });
                 }
                 else
@@ -166,6 +166,7 @@ namespace NodeManager
             queryDescription.ContinuationToken = null;
 
             var nodeTypesToManage = this.nodeManagerSettings.NodeTypesToManage.Split(',').ToList();
+            nodeTypesToManage = nodeTypesToManage.Select(nodeType => nodeType.Trim()).ToList();
 
             do
             {
@@ -181,7 +182,7 @@ namespace NodeManager
                         continue;
                     }
 
-                    if (node.NodeStatus == NodeStatus.Down && nodeTypesToManage.Contains(node.NodeType))
+                    if (node.NodeStatus == NodeStatus.Down && nodeTypesToManage.Contains(node.NodeType, StringComparer.InvariantCultureIgnoreCase))
                     {
                         // is down long enough
                         if (IsDownLongEnough(node))
