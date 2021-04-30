@@ -176,12 +176,6 @@ namespace NodeManager
                     cancellationToken);
                 foreach (var node in nodeList)
                 {
-                    if (IsMyType(node))
-                    {
-                        // do not remove the nodes where this service is running
-                        continue;
-                    }
-
                     if (node.NodeStatus == NodeStatus.Down && nodeTypesToManage.Contains(node.NodeType, StringComparer.InvariantCultureIgnoreCase))
                     {
                         // is down long enough

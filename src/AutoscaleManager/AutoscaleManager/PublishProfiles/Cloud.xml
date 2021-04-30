@@ -20,10 +20,10 @@
                                     AzureActiveDirectory="true"
                                     ServerCertThumbprint="0123456789012345678901234567890123456789" />
   -->
-  <ClusterConnectionParameters ConnectionEndpoint="saharshtest.eastus2euap.cloudapp.azure.com:19000" X509Credential="true" ServerCertThumbprint="9C0502A32602E3F99CFB58152C571830C8EA7707" FindType="FindByThumbprint" FindValue="9C0502A32602E3F99CFB58152C571830C8EA7707" StoreLocation="CurrentUser" StoreName="My" />
+  <ClusterConnectionParameters ConnectionEndpoint="saharshtestauto.eastus.cloudapp.azure.com:19000" X509Credential="true" ServerCertThumbprint="AB13146FE954B5AD8E294E650630F1F52A695DF6" FindType="FindByThumbprint" FindValue="AB13146FE954B5AD8E294E650630F1F52A695DF6" StoreLocation="CurrentUser" StoreName="My" />
   <ApplicationParameterFile Path="..\ApplicationParameters\Cloud.xml" />
   <CopyPackageParameters CompressPackage="true" />
-  <UpgradeDeployment Mode="Monitored" Enabled="true">
+  <UpgradeDeployment Mode="Monitored" Enabled="false">
     <Parameters FailureAction="Rollback" Force="True" />
   </UpgradeDeployment>
 </PublishProfile>

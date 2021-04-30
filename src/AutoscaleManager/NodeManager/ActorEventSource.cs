@@ -11,7 +11,7 @@ namespace NodeManager
     using System.Fabric;
     using System.Threading.Tasks;
 
-    [EventSource(Name = "MyCompany-AutoscaleManager-NodeManager")]
+    [EventSource(Name = "AutoscaleHelper-NodeManager")]
     internal sealed class ActorEventSource : EventSource
     {
         public static readonly ActorEventSource Current = new ActorEventSource();
