@@ -29,6 +29,7 @@ The application exposes set of application parameters which allows users to cust
 |NodeManagerActorService_DownNodeGraceIntervalInSeconds|How long the node should be down for the service to consider it gone for good. <br/><br/>Default value is `120` seconds.|
 |NodeManagerActorService_SkipNodesUnderFabricUpgrade|The service should consider nodes under fabric upgrade for removal or not.  <br/><br/>Default value is `true`.|
 |NodeManagerActorService_PlacementConstraints|Placement constraints with which the service must be deployed. Ideally one should put placement constraints to deploy the application on the primary node type.<br/><br/>Default value is empty.|
+|NodeManagerActorService_NodeTypesToManage | Which nodetypes to consider for AutoscaleHelper to manage the NodeState removal<br/><br/>Default value is empty.|
 
 ## Usage
 

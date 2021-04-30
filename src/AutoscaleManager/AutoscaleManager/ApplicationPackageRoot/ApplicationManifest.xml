@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="AutoscaleManagerType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="AutoscaleManagerType" ApplicationTypeVersion="1.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
     <Parameter Name="NodeManagerActorService_PlacementConstraints" DefaultValue="" />
     <Parameter Name="NodeManagerActorService_PartitionCount" DefaultValue="10" />
@@ -12,12 +12,13 @@
     <Parameter Name="NodeManagerActorService_ClientOperationTimeoutInSeconds" DefaultValue="30" />
     <Parameter Name="NodeManagerActorService_DownNodeGraceIntervalInSeconds" DefaultValue="120" />
     <Parameter Name="NodeManagerActorService_SkipNodesUnderFabricUpgrade" DefaultValue="true" />
+    <Parameter Name="NodeManagerActorService_NodeTypesToManage" DefaultValue="" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
        ServiceManifest.xml file. -->
   <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="NodeManagerPkg" ServiceManifestVersion="1.0.0" />
+    <ServiceManifestRef ServiceManifestName="NodeManagerPkg" ServiceManifestVersion="1.0" />
     <ConfigOverrides>
       <ConfigOverride Name="Config">
         <Settings>
@@ -26,6 +27,7 @@
             <Parameter Name="ClientOperationTimeoutInSeconds" Value="[NodeManagerActorService_ClientOperationTimeoutInSeconds]" />
             <Parameter Name="DownNodeGraceIntervalInSeconds" Value="[NodeManagerActorService_DownNodeGraceIntervalInSeconds]" />
             <Parameter Name="SkipNodesUnderFabricUpgrade" Value="[NodeManagerActorService_SkipNodesUnderFabricUpgrade]" />
+            <Parameter Name="NodeTypesToManage" Value="[NodeManagerActorService_NodeTypesToManage]" />
           </Section>
         </Settings>
       </ConfigOverride>

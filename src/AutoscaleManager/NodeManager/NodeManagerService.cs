@@ -13,6 +13,7 @@ namespace NodeManager
     using System.Fabric.Description;
     using System.Fabric.Health;
     using System.Fabric.Query;
+    using System.Linq;
     using System.Threading;
     using System.Threading.Tasks;
 
@@ -38,18 +39,30 @@ namespace NodeManager
 
             while (!cancellationToken.IsCancellationRequested)
             {
-                try
+                if (string.IsNullOrEmpty(this.nodeManagerSettings.NodeTypesToManage))
                 {
-                    await RemoveScaledInNodesAsync(cancellationToken);
+                    Context.CodePackageActivationContext.ReportApplicationHealth(
+                       new HealthInformation("NodeManager", "NodeManagerSettings", HealthState.Warning)
+                       {
+                           RemoveWhenExpired = true,
+                           TimeToLive = this.nodeManagerSettings.ScanInterval,
+                           Description = "Required Parameter NodeTypesToManage is empty. Set this parameter to configure the comma separated nodetype name list, to be managed by the AutoScaleHelper."
+                       });
                 }
-                catch (Exception e)
+                else
                 {
-                    ActorEventSource.Current.ServiceError(
-                        this.Context,
-                        "Failed to remove scaled-in nodes, Error = {0}",
-                        e);
+                    try
+                    {
+                        await RemoveScaledInNodesAsync(cancellationToken);
+                    }
+                    catch (Exception e)
+                    {
+                        ActorEventSource.Current.ServiceError(
+                            this.Context,
+                            "Failed to remove scaled-in nodes, Error = {0}",
+                            e);
+                    }
                 }
-
 
                 await Task.Delay(this.nodeManagerSettings.ScanInterval, cancellationToken);
             }
@@ -152,6 +165,9 @@ namespace NodeManager
             var queryDescription = new NodeQueryDescription();
             queryDescription.ContinuationToken = null;
 
+            var nodeTypesToManage = this.nodeManagerSettings.NodeTypesToManage.Split(',').ToList();
+            nodeTypesToManage = nodeTypesToManage.Select(nodeType => nodeType.Trim()).ToList();
+
             do
             {
                 var nodeList = await client.QueryManager.GetNodePagedListAsync(
@@ -160,13 +176,7 @@ namespace NodeManager
                     cancellationToken);
                 foreach (var node in nodeList)
                 {
-                    if (IsMyType(node))
-                    {
-                        // do not remove the nodes where this service is running
-                        continue;
-                    }
-
-                    if (node.NodeStatus == NodeStatus.Down)
+                    if (node.NodeStatus == NodeStatus.Down && nodeTypesToManage.Contains(node.NodeType, StringComparer.InvariantCultureIgnoreCase))
                     {
                         // is down long enough
                         if (IsDownLongEnough(node))
