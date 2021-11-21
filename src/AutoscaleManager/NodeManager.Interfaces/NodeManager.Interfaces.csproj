@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <IsServiceFabricServiceProject>True</IsServiceFabricServiceProject>
     <RuntimeIdentifier Condition=" '$(ReferenceRuntimeIdentifier)' != '' ">$(ReferenceRuntimeIdentifier)</RuntimeIdentifier>
-    <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">win7-x64</RuntimeIdentifier>
+    <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">win10-x64</RuntimeIdentifier>
   </PropertyGroup>
 
   <ItemGroup>
