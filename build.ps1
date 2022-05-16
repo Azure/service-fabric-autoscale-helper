@@ -121,6 +121,16 @@ if (!(Test-Path $MSBuildFullPath))
 
 Set-location -Path $SrcRoot
 
+$nugetArgs = @(
+    "restore")
+
+Write-Output "Changing the working directory to $SrcRoot"
+& $NugetFullPath $nugetArgs
+if ($lastexitcode -ne 0) {
+    Set-location -Path $PSScriptRoot
+    throw ("Failed " + $NugetFullPath + " " + $nugetArgs)
+}
+
 Set-location -Path $SfProjRoot
 Write-Output "Changing the working directory to $SfProjRoot"
 Write-Output "Using msbuild from $msbuildFullPath"
