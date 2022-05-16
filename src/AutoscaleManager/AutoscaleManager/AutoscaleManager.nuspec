@@ -4,8 +4,8 @@
 <package>
   <metadata minClientVersion="3.3.0">
     <id>AutoscaleManager-$RuntimeIdentifier$</id>
-    <authors>raunakpandya, vipulm-msft, prashantbhutani90</authors>
-    <version>$Version$</version>
+    <authors>raunakpandya, vipulm-msft, prashantbhutani90, saketharsh</authors>
+    <version>1.0.0</version>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>This package contains the AutoscaleManager Application (Config files and binaries).</description>
   <contentFiles>
@@ -13,6 +13,6 @@
   </contentFiles>
   </metadata>
   <files>
-    <file src="**" target="contentFiles\any\any" />
+    <file src="**" target="lib" />
   </files>
 </package>

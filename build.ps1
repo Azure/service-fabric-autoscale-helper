@@ -26,7 +26,9 @@ param
     [string]$MSBuildFullPath,
 
     [ValidateSet('win7-x64','linux-x64')]    
-    [string]$Runtime = 'win7-x64'
+    [string]$Runtime = 'win7-x64',
+
+    [bool]$GenerateNuget
 )
 
 $ErrorActionPreference = "Stop"
@@ -34,6 +36,16 @@ $PSScriptRoot = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
 $NugetFullPath = join-path $PSScriptRoot "nuget.exe"
 $SrcRoot = join-path $PSScriptRoot "src\\AutoscaleManager"
 $SfProjRoot = join-path $PSScriptRoot "src\\AutoscaleManager\\AutoscaleManager"
+
+
+if($GenerateNuget -eq $true)
+{
+   
+.\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManager.nuspec -basePath out\Release -OutputDirectory out\ -Properties RuntimeIdentifier=$Runtime
+
+exit
+}
+
 
 
 if ($Target -eq "rebuild") {
@@ -109,16 +121,6 @@ if (!(Test-Path $MSBuildFullPath))
 
 Set-location -Path $SrcRoot
 
-$nugetArgs = @(
-    "restore")
-
-Write-Output "Changing the working directory to $SrcRoot"
-& $NugetFullPath $nugetArgs
-if ($lastexitcode -ne 0) {
-    Set-location -Path $PSScriptRoot
-    throw ("Failed " + $NugetFullPath + " " + $nugetArgs)
-}
-
 Set-location -Path $SfProjRoot
 Write-Output "Changing the working directory to $SfProjRoot"
 Write-Output "Using msbuild from $msbuildFullPath"
@@ -133,5 +135,8 @@ $msbuildArgs = @(
     "/property:ReferenceRuntimeIdentifier=$Runtime"
     $args)
 & $msbuildFullPath $msbuildArgs
+
+
+
 
 Set-location -Path $PSScriptRoot
