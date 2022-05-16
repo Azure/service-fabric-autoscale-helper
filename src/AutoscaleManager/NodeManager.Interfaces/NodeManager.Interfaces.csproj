@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <IsServiceFabricServiceProject>True</IsServiceFabricServiceProject>
     <RuntimeIdentifier Condition=" '$(ReferenceRuntimeIdentifier)' != '' ">$(ReferenceRuntimeIdentifier)</RuntimeIdentifier>
     <RuntimeIdentifier Condition=" '$(RuntimeIdentifier)' == '' ">win7-x64</RuntimeIdentifier>
