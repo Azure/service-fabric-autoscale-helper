@@ -26,7 +26,9 @@ param
     [string]$MSBuildFullPath,
 
     [ValidateSet('win7-x64','linux-x64')]    
-    [string]$Runtime = 'win7-x64'
+    [string]$Runtime = 'win7-x64',
+
+    [bool]$GenerateNuget
 )
 
 $ErrorActionPreference = "Stop"
@@ -34,6 +36,16 @@ $PSScriptRoot = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
 $NugetFullPath = join-path $PSScriptRoot "nuget.exe"
 $SrcRoot = join-path $PSScriptRoot "src\\AutoscaleManager"
 $SfProjRoot = join-path $PSScriptRoot "src\\AutoscaleManager\\AutoscaleManager"
+
+
+if($GenerateNuget -eq $true)
+{
+   
+.\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManager.nuspec -basePath out\Release -OutputDirectory out\NugetPackages -Properties RuntimeIdentifier=$Runtime
+
+exit
+}
+
 
 
 if ($Target -eq "rebuild") {
@@ -133,5 +145,8 @@ $msbuildArgs = @(
     "/property:ReferenceRuntimeIdentifier=$Runtime"
     $args)
 & $msbuildFullPath $msbuildArgs
+
+
+
 
 Set-location -Path $PSScriptRoot

@@ -7,6 +7,8 @@
     <MinToolsVersion>1.5</MinToolsVersion>
     <SupportedMSBuildNuGetPackageVersion>1.7.3</SupportedMSBuildNuGetPackageVersion>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <SrcRoot>..\..\..\src</SrcRoot>
+    <OUTPUTROOT>$(SrcRoot)\..\out</OUTPUTROOT>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|x64">
@@ -40,6 +42,12 @@
     <ApplicationProjectTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Service Fabric Tools\Microsoft.VisualStudio.Azure.Fabric.ApplicationProject.targets</ApplicationProjectTargetsPath>
   </PropertyGroup>
   <Import Project="$(ApplicationProjectTargetsPath)" Condition="Exists('$(ApplicationProjectTargetsPath)')" />
+  <Target Name="CopyPackage" AfterTargets="Package">
+    <ItemGroup>
+        <PackageContents Include="$(PackageLocation)\**\*.*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(PackageContents)" DestinationFolder="$(OUTPUTROOT)\$(Configuration)\AutoscaleManager\%(RecursiveDir)" SkipUnchangedFiles="true" />    
+  </Target>
   <Target Name="ChangeServiceManifest" Condition=" '$(ReferenceRuntimeIdentifier)' == 'linux-x64'" AfterTargets="Package">
     <Message Text="Running powershell -noprofile $(MSBuildProjectDirectory)\Scripts\Update-ServiceManifest.ps1 -pathToManifest $(MSBuildProjectDirectory)\$(PackageLocation)" Importance="high" />
     <Exec Command="powershell -noprofile $(MSBuildProjectDirectory)\Scripts\Update-ServiceManifest.ps1 -pathToManifest $(MSBuildProjectDirectory)\$(PackageLocation)" />
