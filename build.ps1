@@ -40,9 +40,8 @@ $SfProjRoot = join-path $PSScriptRoot "src\\AutoscaleManager\\AutoscaleManager"
 
 if($GenerateNuget -eq $true)
 {
-   
-.\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManager.nuspec -basePath out\Release -OutputDirectory out\NugetPackages -Properties RuntimeIdentifier=$Runtime
-
+.\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManagerWindows.nuspec -basePath .\out\Release\win7-x64 -OutputDirectory out\NugetPackages 
+.\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManagerLinux.nuspec -basePath .\out\Release\linux-x64 -OutputDirectory out\NugetPackages 
 exit
 }
 

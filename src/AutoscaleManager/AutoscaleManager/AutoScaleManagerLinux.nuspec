@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!-- To create a nuget package
+     nuget pack AutoscaleManager.nuspec -basepath pkg\Release -Properties RuntimeIdentifier=linux-x64 -->
+<package>
+  <metadata minClientVersion="3.3.0">
+    <id>Microsoft.Azure.ServiceFabric.AutoScaleManager.Linux</id>
+    <authors>Microsoft</authors>
+    <license type="expression">MIT</license>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <title>Service Fabric Autoscale Manager Application</title>
+    <version>1.0.0</version>
+    <description>This package contains the AutoscaleManager application. It is a Service Fabric Application used to automate removal of Node State from Bronze durabliity Node Types in a Azure Service Fabric Cluster.</description>
+  <contentFiles>
+    <files include="**" buildAction="None" copyToOutput="true" />
+  </contentFiles>
+  <dependencies>
+  <group targetFramework=".NETStandard2.0" />
+  </dependencies>
+  <tags>azure service-fabric fabric-autoscalemanager utility </tags>
+  <copyright>© Microsoft Corporation. All rights reserved.</copyright>
+  </metadata>
+  <files>
+    <file src="**" target="lib" />
+  </files>
+</package>

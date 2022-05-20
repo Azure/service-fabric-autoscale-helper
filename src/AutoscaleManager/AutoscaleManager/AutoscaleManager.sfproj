@@ -46,7 +46,7 @@
     <ItemGroup>
         <PackageContents Include="$(PackageLocation)\**\*.*" />
     </ItemGroup>
-    <Copy SourceFiles="@(PackageContents)" DestinationFolder="$(OUTPUTROOT)\$(Configuration)\AutoscaleManager\%(RecursiveDir)" SkipUnchangedFiles="true" />    
+    <Copy SourceFiles="@(PackageContents)" DestinationFolder="$(OUTPUTROOT)\$(Configuration)\$(ReferenceRuntimeIdentifier)\AutoscaleManager\%(RecursiveDir)" SkipUnchangedFiles="true" />    
   </Target>
   <Target Name="ChangeServiceManifest" Condition=" '$(ReferenceRuntimeIdentifier)' == 'linux-x64'" AfterTargets="Package">
     <Message Text="Running powershell -noprofile $(MSBuildProjectDirectory)\Scripts\Update-ServiceManifest.ps1 -pathToManifest $(MSBuildProjectDirectory)\$(PackageLocation)" Importance="high" />
