@@ -3,7 +3,7 @@
      nuget pack AutoscaleManager.nuspec -basepath pkg\Release -Properties RuntimeIdentifier=linux-x64 -->
 <package>
   <metadata minClientVersion="3.3.0">
-    <id>Microsoft.Azure.ServiceFabric.AutoScaleManager.Linux</id>
+    <id>Microsoft.ServiceFabric.AutoScaleManager.Linux</id>
     <authors>Microsoft</authors>
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
