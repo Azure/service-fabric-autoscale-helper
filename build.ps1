@@ -146,7 +146,7 @@ $msbuildArgs = @(
     $args)
 & $msbuildFullPath $msbuildArgs
 
-if ($Runtime -eq "linux_x64")
+if ($Runtime -eq "linux-x64")
 {
     Set-Location -Path $LinuxOutFolder
     (Get-Content .\ServiceManifest.xml ) -replace ".exe" , "" | Out-File -encoding ASCII ServiceManifest.xml
