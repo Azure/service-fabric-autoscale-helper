@@ -16,6 +16,7 @@
   <dependencies>
   <group targetFramework=".NETStandard2.0" />
   </dependencies>
+  <projectUrl>https://github.com/Azure/service-fabric-autoscale-helper</projectUrl>
   <tags>azure service-fabric fabric-autoscalemanager utility </tags>
   <copyright>© Microsoft Corporation. All rights reserved.</copyright>
   </metadata>
