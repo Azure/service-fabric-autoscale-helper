@@ -36,6 +36,7 @@ $PSScriptRoot = Split-Path -Parent -Path $MyInvocation.MyCommand.Definition
 $NugetFullPath = join-path $PSScriptRoot "nuget.exe"
 $SrcRoot = join-path $PSScriptRoot "src\\AutoscaleManager"
 $SfProjRoot = join-path $PSScriptRoot "src\\AutoscaleManager\\AutoscaleManager"
+$LinuxOutFolder = join-path $PSScriptRoot "out\Release\linux-x64\AutoscaleManager\NodeManagerPkg"
 
 
 if($GenerateNuget -eq $true)
@@ -145,7 +146,10 @@ $msbuildArgs = @(
     $args)
 & $msbuildFullPath $msbuildArgs
 
-
-
+if ($Runtime -eq "linux_x64")
+{
+    Set-Location -Path $LinuxOutFolder
+    (Get-Content .\ServiceManifest.xml ) -replace ".exe" , "" | Out-File -encoding ASCII ServiceManifest.xml
+}
 
 Set-location -Path $PSScriptRoot
