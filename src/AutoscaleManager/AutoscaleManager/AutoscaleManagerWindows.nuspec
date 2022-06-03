@@ -6,7 +6,7 @@
     <license type="expression">MIT</license>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <title>Service Fabric Autoscale Manager Application</title>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description>This package contains the AutoscaleManager application. It is a Service Fabric Application used to automate removal of Node State from Bronze durabliity Node Types in a Azure Service Fabric Cluster.</description>
   <contentFiles>
     <files include="**" buildAction="None" copyToOutput="true" />
