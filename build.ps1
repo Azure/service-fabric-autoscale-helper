@@ -149,7 +149,7 @@ $msbuildArgs = @(
 if ($Runtime -eq "linux-x64")
 {
     Set-Location -Path $LinuxOutFolder
-    (Get-Content .\ServiceManifest.xml ) -replace ".exe" , "" | Out-File -encoding ASCII ServiceManifest.xml
+    (Get-Content .\ServiceManifest.xml ) -replace "NodeManager.exe" , "NodeManager" | Out-File -encoding ASCII ServiceManifest.xml
 }
 
 Set-location -Path $PSScriptRoot
