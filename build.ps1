@@ -10,21 +10,25 @@
 
 param
 (
+    # Configuration to build.
     [ValidateSet('Debug', 'Release')]
     [string]$Configuration = "Release",
 
+    # Platform to build for. 
     [ValidateSet('clean', 'rebuild')]
     [string]$Target = "rebuild",
 
+    # msbuild verbosity level.
     [ValidateSet('quiet','minimal', 'normal', 'detailed', 'diagnostic')]
     [string]$Verbosity = 'minimal',
 
+    # path to msbuild
     [string]$MSBuildFullPath,
 
     [ValidateSet('win-x64','linux-x64')]    
     [string]$Runtime = 'win-x64',
 
-    [bool]$GenerateNuget,
+    [switch]$GenerateNuget = $false,
 
     [switch]$SelfContained = $false
 )
@@ -39,7 +43,7 @@ $LinuxOutFolder = join-path $PSScriptRoot "out\Release\linux-x64\AutoscaleManage
 
 if($GenerateNuget -eq $true)
 {
-    .\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManagerWindows.nuspec -basePath .\out\Release\win7-x64 -OutputDirectory out\NugetPackages 
+    .\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManagerWindows.nuspec -basePath .\out\Release\win-x64 -OutputDirectory out\NugetPackages 
     .\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManagerLinux.nuspec -basePath .\out\Release\linux-x64 -OutputDirectory out\NugetPackages 
     exit
 }
