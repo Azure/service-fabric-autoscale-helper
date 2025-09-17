@@ -10,25 +10,23 @@
 
 param
 (
-    # Configuration to build.
     [ValidateSet('Debug', 'Release')]
     [string]$Configuration = "Release",
 
-    # Platform to build for. 
     [ValidateSet('clean', 'rebuild')]
     [string]$Target = "rebuild",
 
-    # msbuild verbosity level.
     [ValidateSet('quiet','minimal', 'normal', 'detailed', 'diagnostic')]
     [string]$Verbosity = 'minimal',
 
-    # path to msbuild
     [string]$MSBuildFullPath,
 
-    [ValidateSet('win7-x64','linux-x64')]    
-    [string]$Runtime = 'win7-x64',
+    [ValidateSet('win-x64','linux-x64')]    
+    [string]$Runtime = 'win-x64',
 
-    [bool]$GenerateNuget
+    [bool]$GenerateNuget,
+
+    [switch]$SelfContained = $false
 )
 
 $ErrorActionPreference = "Stop"
@@ -41,9 +39,9 @@ $LinuxOutFolder = join-path $PSScriptRoot "out\Release\linux-x64\AutoscaleManage
 
 if($GenerateNuget -eq $true)
 {
-.\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManagerWindows.nuspec -basePath .\out\Release\win7-x64 -OutputDirectory out\NugetPackages 
-.\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManagerLinux.nuspec -basePath .\out\Release\linux-x64 -OutputDirectory out\NugetPackages 
-exit
+    .\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManagerWindows.nuspec -basePath .\out\Release\win7-x64 -OutputDirectory out\NugetPackages 
+    .\nuget.exe pack .\src\AutoscaleManager\AutoscaleManager\AutoscaleManagerLinux.nuspec -basePath .\out\Release\linux-x64 -OutputDirectory out\NugetPackages 
+    exit
 }
 
 
@@ -95,7 +93,7 @@ if($MSBuildFullPath -eq "")
         {
             break
         }
-    }
+        }
 
     if (!(Test-Path $MSBuildFullPath))
     {
@@ -116,7 +114,7 @@ if($MSBuildFullPath -eq "")
 if (!(Test-Path $MSBuildFullPath))
 {
     throw "Unable to find MSBuild installed on this machine. Please install Visual Studio 2019 or if its installed at non-default location, provide the full ppath to msbuild using -MSBuildFullPath parameter."
-}
+        }
 
 
 Set-location -Path $SrcRoot
@@ -133,18 +131,21 @@ if ($lastexitcode -ne 0) {
 
 Set-location -Path $SfProjRoot
 Write-Output "Changing the working directory to $SfProjRoot"
-Write-Output "Using msbuild from $msbuildFullPath"
+Write-Output "Using msbuild from $MSBuildFullPath"
+
 $msbuildArgs = @(
     "/nr:false", 
     "/nologo", 
-    "$restore"
+    "$restore",
     "/t:$buildTarget", 
-    "/verbosity:$verbosity",  
+    "/verbosity:$verbosity",
+    "/property:SelfContained=$SelfContained",
     "/property:RequestedVerbosity=$verbosity", 
-    "/property:Configuration=$configuration",
+    "/property:Configuration=$Configuration",
     "/property:ReferenceRuntimeIdentifier=$Runtime"
     $args)
-& $msbuildFullPath $msbuildArgs
+
+& $MSBuildFullPath $msbuildArgs
 
 if ($Runtime -eq "linux-x64")
 {
